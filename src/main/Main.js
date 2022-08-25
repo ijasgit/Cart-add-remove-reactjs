@@ -11,7 +11,7 @@ export default class Main extends Component {
     constructor() {
         super();
         this.state = {
-            newCart: [],
+            newCart: [],empty:[],
             list: [{ image: img1, name: "HP", type: "ssd", price: "40,000", value: 1, qty: 0 },
             { image: img2, name: "MAC", type: "Hard disk", price: "40,000", value: 2, qty: 0 },
             { image: img3, name: "DELL", type: "ssd", price: "40,000", value: 3, qty: 0 }
@@ -34,7 +34,7 @@ export default class Main extends Component {
             console.log(data.qty)
             data.qty = data.qty + 1
             console.log(data.qty)
-            this.setState({ newCart: [...this.state.newCart, data.qty] })
+            this.setState({ newCart: [...this.state.newCart] })
         }
     };
     removeToCart = (data) => {
@@ -44,11 +44,13 @@ export default class Main extends Component {
         console.log("end")
         if (found === true) {
             if ((data.qty) > 0) {
-                data.qty = data.qty - 1
-                // this.setState({ newCart: [""] })
-                // this.setState({ newCart: [...this.state.list, data.qty] })
+                var index=a.indexOf(data)
+                a.splice(index,1);
+                data.qty = 0;
+                // this.setState({ data: undefined })
+                this.setState({ newCart: [...this.state.newCart] })
 
-                this.setState({ newCart: [...this.state.newCart, data.qty] });
+                this.setState({ newCart: [...this,] });
             }
             // else{
             //  this.setState({ newCart: [] })   
