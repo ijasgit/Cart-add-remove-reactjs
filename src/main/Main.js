@@ -11,7 +11,7 @@ export default class Main extends Component {
     constructor() {
         super();
         this.state = {
-            newCart: [],empty:[],
+            newCart: [],
             list: [{ image: img1, name: "HP", type: "ssd", price: "40,000", value: 1, qty: 0 },
             { image: img2, name: "MAC", type: "Hard disk", price: "40,000", value: 2, qty: 0 },
             { image: img3, name: "DELL", type: "ssd", price: "40,000", value: 3, qty: 0 }
@@ -44,26 +44,29 @@ export default class Main extends Component {
         console.log("end")
         if (found === true) {
             if ((data.qty) > 0) {
-                var index=a.indexOf(data)
-                a.splice(index,1);
+                var index = a.indexOf(data)
+                a.splice(index, 1);
                 data.qty = 0;
                 // this.setState({ data: undefined })
                 this.setState({ newCart: [...this.state.newCart] })
 
-                this.setState({ newCart: [...this,] });
+                // this.setState({ newCart: [...this,] });
             }
-            // else{
-            //  this.setState({ newCart: [] })   
-            // }
 
         }
-        // else {
-        //     // console.log("hi")
-        //     console.log(data.qty)
-        //     data.qty = data.qty - 1l
-        //     console.log(data.qty)
-        //     this.setState({ newCart: [...this.state.newCart, data.qty] })
-        // }
+
+    }
+    plusToCart = (data) => {
+        this.addToCart(data)
+    }
+    minusToCart = (data) => {
+        if ((data.qty) > 1) {
+            data.qty = data.qty - 1
+            this.setState({ newCart: [...this.state.newCart] })
+        }
+        else {
+            this.removeToCart(data)
+        }
 
     }
 
@@ -79,9 +82,12 @@ export default class Main extends Component {
                 </div>
                 <div>
                     {this.state.newCart.map((product, value) =>
-                        <Cart key={value} product={product} removeToCart={this.removeToCart} />)
+                        <Cart key={value} product={product} removeToCart={this.removeToCart}
+                            plusToCart={this.plusToCart}
+                            minusToCart={this.minusToCart} />)
 
-                    }</div>
+                    }
+                </div>
             </div>
 
         )

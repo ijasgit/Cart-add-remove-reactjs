@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import "../main/product.css"
 
 
 export default class Product extends Component {
@@ -14,7 +14,7 @@ export default class Product extends Component {
 
     render() {
         return (
-            <div>
+            <div className='product-container'>
                 <div >
 
                     <h1>{this.props.product.name}</h1>
